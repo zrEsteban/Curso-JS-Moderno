@@ -13,6 +13,10 @@ parrafo2.classList.add('titulo');
 const parrafo3 = document.createElement('p');
 parrafo3.textContent = '$800 por persona';
 parrafo3.classList.add('precio');
+//parrafo3.onclick = nuevaFunction(1);
+parrafo3.onclick = function(){
+    nuevaFunction(1)
+};
 
 // crear el div...
 const info = document.createElement('div');
@@ -38,3 +42,9 @@ contenedorCard.appendChild(info);
 // Insertarlo en el HTML...
 const contenedor = document.querySelector('.hacer .contenedor-cards');
 contenedor.appendChild(contenedorCard); // al inicio info
+
+
+/* Funcion para evitar bubbling */
+function nuevaFunction (id) {
+    console.log('Desde nueva funcion ',id);
+};;
