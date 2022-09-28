@@ -105,39 +105,28 @@ function mostrarError(msj){
 function enviarEmail(e){
     e.preventDefault();
     // mostrar spinner
-    const spinner = document.querySelector('#spinner');
-
-    console.log()
-    
+    const spinner = document.querySelector('#spinner');  
     spinner.style.display = 'flex';
-    console.log(typeof email.value);
-    console.log(email.value);
     
-    console.log(typeof msj.value);
-    console.log(msj.value);
-
-    console.log(typeof asunto.value);
-    console.log(asunto.value);
-
-    Email.send({        
-        
-        /*
-        Host : "smtp.elasticemail.com",        
-        Username : "mailman@e-zamora.com",
-        Password : "3234CA679793F76B2A7589DA0D3BE0F3A4EE",        
-        */
-        SecureToken : "591696bf-1599-41a2-b3e7-0cbaa3d42560",    
+    let templateParams = {
+        From_name: "EZamora",
         To: email.value,
-        From: "mailman@e-zamora.com",
         Subject: asunto.value,
         Body: msj.value
-      }).then(
-        message => {             
-            spinner.style.display = 'none';            
-            alert(message);            
-            resetearFormulario(e);
-        }
-    );
+    };
+
+    emailjs.send('service_wz7ryd1','template_spvuq4r',templateParams,'S5A7N79EIBi2VBEqB')
+    .then( res => {
+            // console.log('SUCCESS!', res.status, res.text);
+            if (res.status === 200){
+                spinner.style.display = 'none';
+                alert(res.text);
+                resetearFormulario(e);
+            };
+         }, err => {
+            console.log('FAILED...', err);
+            alert(err)
+         });       
 }
 
 // Resetear formulario
