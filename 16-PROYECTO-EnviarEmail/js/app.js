@@ -115,7 +115,7 @@ function enviarEmail(e){
         Body: msj.value
     };
 
-    emailjs.send('service_wz7ryd1','template_spvuq4r',templateParams,'S5A7N79EIBi2VBEqB')
+    emailjs.send()
     .then( res => {
             // console.log('SUCCESS!', res.status, res.text);
             if (res.status === 200){
