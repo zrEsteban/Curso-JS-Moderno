@@ -110,17 +110,31 @@ function enviarEmail(e){
     console.log()
     
     spinner.style.display = 'flex';
+    console.log(typeof email.value);
+    console.log(email.value);
     
-    Email.send({
-        SecureToken : "4D011431DE09840D8F804CF9C656818D3B8C",
+    console.log(typeof msj.value);
+    console.log(msj.value);
+
+    console.log(typeof asunto.value);
+    console.log(asunto.value);
+
+    Email.send({        
+        
+        /*
+        Host : "smtp.elasticemail.com",        
+        Username : "mailman@e-zamora.com",
+        Password : "3234CA679793F76B2A7589DA0D3BE0F3A4EE",        
+        */
+        SecureToken : "591696bf-1599-41a2-b3e7-0cbaa3d42560",    
         To: email.value,
-        From: "zr.esteban@gmail.com",
+        From: "mailman@e-zamora.com",
         Subject: asunto.value,
         Body: msj.value
       }).then(
         message => {             
             spinner.style.display = 'none';            
-            alert(message);
+            alert(message);            
             resetearFormulario(e);
         }
     );
@@ -132,8 +146,3 @@ function resetearFormulario(e){
     formulario.reset();
     inicarApp();
 }
-
-/*
-smtp.elasticemail.com
-2525
-*/
