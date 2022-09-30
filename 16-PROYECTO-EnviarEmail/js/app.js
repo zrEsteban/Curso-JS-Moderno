@@ -48,6 +48,8 @@ function inicarApp(){
 // Validar formulario
 function validarFormulario(e){
     
+    const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     if (e.target.value.length > 0 ) {
         console.log('Hay algo');   
         eliminarError();     
@@ -55,9 +57,7 @@ function validarFormulario(e){
         e.target.classList.add('border','border-green-500');
 
         if ( e.target.type === 'email') {
-            const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                   
-            if ( er.test(e.target.value) ) {
+           if ( er.test(e.target.value) ) {
                 eliminarError();
                 e.target.classList.add('border','border-green-500'); /* Estilos desde framework */
                 console.log('Email valido')
@@ -76,7 +76,7 @@ function validarFormulario(e){
         mostrarError('Todos los campos son obligarotios');
     }
     
-    if (email.classList.contains('border-green-500') &&  asunto.classList.contains('border-green-500') && msj.classList.contains('border-green-500')) { 
+    if (er.test(email.value &&  asunto.classList.contains('border-green-500') && msj.classList.contains('border-green-500')) { 
         console.log('Todos los campos son validos');  
         btnEnviar.disabled = false;
         btnEnviar.classList.remove('cursor-not-allowed','opacity-50');  
@@ -115,7 +115,7 @@ function enviarEmail(e){
         Body: msj.value
     };
 
-    emailjs.send()
+    emailjs.send(/* */)
     .then( res => {
             // console.log('SUCCESS!', res.status, res.text);
             if (res.status === 200){
